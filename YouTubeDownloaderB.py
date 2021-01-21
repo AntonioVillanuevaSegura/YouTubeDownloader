@@ -23,7 +23,8 @@ def descarga(http):
 
 #Click boton de descarga   
 def click(http):
-    descarga(http)
+    if ("https://www.youtube." in http):
+        descarga(http)
     
 #Pantalla grafica tkinter  ,Clase que contiene los widgets tkinter
 class Graficos: 
@@ -33,7 +34,7 @@ class Graficos:
         self.ventana=ventana
             
         # Texto
-        etiqueta1 = Label (self.ventana, text = "COPIA EL VIDEO QUE QUIERES DESCARGAR")
+        etiqueta1 = Label (self.ventana, fg="red",text = "COPIA EL VIDEO QUE QUIERES DESCARGAR")
         etiqueta1.pack()
         
         # Entrada de texto
@@ -43,15 +44,15 @@ class Graficos:
         seleccion1 = Checkbutton (self.ventana ,text = "seleccion 1")
         seleccion1.pack()    
                 
-
         # Boton de descarga
         bouton1 = Button (self.ventana, text = "DESCARGA",fg = "red",command= lambda: click(entrada1.get()) ,
             bd = 2, bg = "light green", relief = "groove")
-        bouton1.pack()    
+        bouton1.pack()  
+        
                 
 #Main        
 def main():
-    
+    #Tamano de la ventana
     max_x=800
     max_y=100
     tam=str(max_x)+"x"+str(max_y)
@@ -60,7 +61,7 @@ def main():
     ventana = Tk()
     
     #Titulo
-    ventana.title("YouTube Downloader por A.Villanueva ")
+    ventana.title("YouTube Downloader por Antonio Villanueva ")
 
     #Dimensiones de la ventana principal
     ventana.geometry(tam)
