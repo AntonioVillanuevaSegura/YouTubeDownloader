@@ -5,6 +5,8 @@
     https://github.com/pytube/pytube?fbclid=IwAR1T-KnFOsFrYdbBRZ3U7zUGwcuT-ESZO2TGIL1RLPIKuxY0BZ1JbFol6s0
     sudo apt install python3.7-tk
     23012021  incluye checkButton para listas 
+    https://nuitka.net/doc/user-manual.html#use-case-1-program-compilation-with-all-modules-embedded    
+    python -m nuitka --onefile program.py   
 """
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
