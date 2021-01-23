@@ -1,3 +1,4 @@
+
 """  
     YouTube downloader Antonio Villanueva Segura
     usando la libreria pytube https://pypi.org/project/pytube/
@@ -14,30 +15,36 @@ from pytube import YouTube
 from pytube import Playlist
 from tkinter import *
 
-
-
 #Informacion del video descargando
 def informacionVideo(video):
-    print( "Titulo",video.title)
+    #print( "Titulo",video.title)
     #video.thumbnail_url #imagen
+    return video.title
     
-def descarga(http,modoLista):
+def descarga(http,modoLista,informacion,ventana):
     #Detecta si es una lista o un video simple
     if ( ("list" in http) and (modoLista)):
         listaVideos = Playlist (http) 
         
         for video in listaVideos.videos:
+            informacion.set (informacionVideo(video))
+            ventana.update()            
             video.streams.first().download()
                      
     else:#Video simple  
         video=YouTube(http)
-        informacionVideo(video)
+        #Muestra informacion del video descargando
+        informacion.set (informacionVideo(video))
+        ventana.update()
         video.streams.first().download()
 
 #Click boton de descarga   
-def click(http,modoLista):    
+def click(http,modoLista,informacion,ventana):   
+
     if ("https://www.youtube." in http):#filtra el texto seleccionado       
-        descarga(http,modoLista)      
+        descarga(http,modoLista,informacion,ventana)
+    informacion.set("")#Reset informacion del video en descarga
+    ventana.update()    
     
 #Pantalla grafica tkinter  ,Clase que contiene los widgets tkinter
 class Graficos: 
@@ -62,17 +69,15 @@ class Graficos:
         #CheckButton confirmacion de descarga de listas , por si un video simple esta en una lista
         seleccion1 = Checkbutton (self.ventana ,text = "Modo Lista",variable = modoLista)
         seleccion1.pack()    
-        
                 
         # Boton de descarga
-        bouton1 = Button (self.ventana, text = "DESCARGA",fg = "red",command= lambda: click(entrada1.get(),modoLista.get() ) ,
+        bouton1 = Button (self.ventana, text = "DESCARGA",fg = "red",command= lambda: click(entrada1.get(),modoLista.get(),informacion ,ventana) ,
             bd = 2, bg = "light green", relief = "groove")
         bouton1.pack()  
         
         etiqueta2 = Label(self.ventana, textvariable = informacion )
         etiqueta2.pack()        
         
-                
 #Main        
 def main():
     #Tamano de la ventana
