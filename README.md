@@ -7,3 +7,5 @@
 (FR)Le fichier YoutubeDownloarderB.bin est une version compilée pour linux exactement dans UBUNTU 16.04, compilée grâce à NUITKA
 
 python -m nuitka --onefile program.py 
+
+python -m nuitka --onefile --plugin-enable=tk-inter --plugin-enable=pylint-warnings YoutubeDownloarderB.py
